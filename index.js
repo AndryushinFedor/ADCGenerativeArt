@@ -37,9 +37,9 @@ wsConnection.onerror = function (error) {
 }
 
 wsConnection.onmessage = function message(event) {
-  // console.log('received: %s', event.data)
-  // console.log(JSON.parse(event.data))
-  // radius = parseInt(event.data)
+   console.log('received: %s', event.data)
+   console.log(JSON.parse(event.data))
+   //radius = parseInt(event.data)
   sketchData = JSON.parse(event.data)
   // console.log(sketchData)
 }
@@ -76,19 +76,23 @@ document.addEventListener('DOMContentLoaded', () => {
     p.draw = () => {
       // const offset = canvasSize / 2 + radius / 2;
       const offset = {
-        x: canvasSize.width / 2 + Math.abs(sketchData.gyroscope.x) / 100,
-        y: canvasSize.height / 2 + Math.abs(sketchData.gyroscope.y) / 100
-        // x: canvasSize.width / 2 + Math.abs(sketchData.accelerometer.x) / 100,
-        // y: canvasSize.height / 2 + Math.abs(sketchData.accelerometer.y) / 100
+        // x: canvasSize.width / 2 + Math.abs(sketchData.gyroscope.x) / 100,
+        // y: canvasSize.height / 2 + Math.abs(sketchData.gyroscope.y) / 100
+         x: canvasSize.width / 4 + Math.abs(sketchData.accelerometer.y) / 50,
+         y: canvasSize.height / 4 + Math.abs(sketchData.accelerometer.x) / 50
         // x: sketchData.gyroscope.x,
         // y: sketchData.gyroscope.y
       }
 
+      let r = 255 - ((36 - sketchData.temperature) * 25)
+      let b = (36 - sketchData.temperature) * 25
+
+      console.log(sketchData.temperature)
+
       p.background(100)
       p.noStroke()
-
       p.colorMode(p.RGB)
-      p.fill(255, 100, 150)
+      p.fill(r, 0, b)
       p.ellipse(offset.x, offset.y, radius, radius)
       // console.log(offset.x, offset.y)
     }
