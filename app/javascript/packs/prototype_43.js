@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let s = 2;
     let y = 0;
     let a = 2;
+    let back = 100;
 
   let sketch = (p) => {
     p.setup = () => {
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       p.frameRate(60)
-      p.background(300)
+      p.background(back)
     }
 
     p.draw = () => {
